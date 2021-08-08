@@ -1,12 +1,6 @@
 const numberGuesser = module.exports;
 const Discord = require('discord.js');
 
-// // Number Guesser
-// numberGuesserChannel: syniks.db.DataTypes.STRING,
-// numberGuesserNumber: syniks.db.DataTypes.INTEGER,
-// numberGuesserNumberMin: syniks.db.DataTypes.INTEGER,
-// numberGuesserNumberMax: syniks.db.DataTypes.INTEGER,
-
 
 numberGuesser.generateNumber = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
@@ -23,7 +17,7 @@ numberGuesser.bot;
 
 numberGuesser.init = bot => {
     numberGuesser.bot = bot;
-
+    
     bot.on('message', async message => {
         if (!message.guild || message.author.bot) return;
         
@@ -37,12 +31,12 @@ numberGuesser.init = bot => {
 
 numberGuesser.onGuess = (message, guildConfig) => {
     let guess = parseInt(message.content);
-
+    
     if (isNaN(guess)) return numberGuesser.onGuessNaN(message);
     if(guess < guildConfig.numberGuesserNumberMin) return numberGuesser.onGuessTooSmall(message, guildConfig);
     if(guess > guildConfig.numberGuesserNumberMax) return numberGuesser.onGuessTooBig(message, guildConfig);
     if (guess != guildConfig.numberGuesserNumber) return numberGuesser.onGuessIncorrect(message);
-
+    
     return numberGuesser.onGuessCorrect(message, guildConfig);
 };
 

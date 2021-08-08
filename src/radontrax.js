@@ -150,7 +150,6 @@ setInterval(async () => {
     }
 }, 60000*3);
 
-// THIS IS REQUIRED. Send raw events to Erela.js
 bot.on("raw", d => bot.manager.updateVoiceState(d));
 
 setInterval(async () => {
@@ -179,7 +178,8 @@ setInterval(() => {
 }, 10000)
 
 
-//
+
+
 const util = require('util');
 const childProcess = require('child_process');
 
@@ -198,18 +198,18 @@ init().then(() => {
     
     function handleRejection(reason, p) {
         try {
-            console.error('Unhandled rejection at: Promise ', p, 'reason: ', reason); // eslint-disable-line
+            console.error('Unhandled rejection at: Promise ', p, 'reason: ', reason);
         } catch (err) {
-            console.error(reason); // eslint-disable-line
+            console.error(reason);
         }
     }
     
     function handleException(err) {
         if (!err || (typeof err === 'string' && !err.length)) {
-            return console.error('An undefined exception occurred.'); // eslint-disable-line
+            return console.error('An undefined exception occurred.');
         }
         
-        console.error(err); // eslint-disable-line
+        console.error(err);
     }
     
     bot.login(bot.config.token);

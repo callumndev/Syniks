@@ -10,9 +10,6 @@ exports.run = async (bot,message,args) => {
     if(isNaN(time)) return message.channel.send(bot.error("INVALID_ARGS"))
     let reason = args.slice(2).join(" ");
     if(!reason) {reason = "No reason provided!"}
-    // if(user.roles.highest.position >= message.member.roles.highest.position) return message.channel.send("**[:x:] This user is above you!**")
-    // if(user.roles.highest.position >= message.guild.me.roles.highest.position) return message.channel.send("**[:x:] This user is above me!**")
-    // message.guild.ban(user, reason);
     let log = await bot.utils.Log.send(bot,message,message.guild.id,`Temp Mute Report:
     
     **User** ${user.user.tag}

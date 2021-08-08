@@ -4,7 +4,6 @@ exports.run = async (bot,message,args) => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(bot.error("NO_PERM"))
     let arg = parseInt(args[0]);
     if(!arg) return message.channel.send(bot.error("INVALID_ARGS"))
-    // message.channel.bulkDelete(arg+1);
     message.delete()
     message.channel.messages.fetch({ limit: arg })
     .then(messages => {

@@ -8,11 +8,9 @@ exports.run = async (bot,message,args) => {
     let warns = [];
     let warnsL = new Discord.MessageEmbed()
     .setTitle(`**${user.user.tag} | Infractions**`)
-    // .setDescription(warns.join("\n\n") || "No warns stored!")
     .setColor(bot.color)
     
     for(let warn of load) {
-        // warns.push(`**ID ${warn.wid}**\n**Reason**: ${warn.reason}\n**Warned By:** ${message.guild.members.cache.get(warn.staff)}`)
         warnsL.addField(`__${warn.type}__`, `**ID**: ${warn.wid}\n**Reason**: ${warn.reason}\n**Given By:** ${message.guild.members.cache.get(warn.staff)}`, true)
     }
     

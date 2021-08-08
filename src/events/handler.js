@@ -11,7 +11,6 @@ const automod = require("../utils/automod")
 handle.list = ['message', 'messageDelete', 'messageUpdate', 'userUpdate', 'guildMemberAdd', 'guildMemberUpdate', 'roleCreate', 'roleDelete', 'roleUpdate', 'guildUpdate', 'emojiUpdate', 'channelCreate', 'channelUpdate', 'channelDelete', 'messageReactionAdd', 'messageReactionRemove', 'voiceStateUpdate', 'inviteCreate']
 handle.ignore = ['embedEnabled', 'systemChannelFlags', 'permissions', 'permissionOverwrites']
 let ban = ["https://" , "www." , ".gg" , ".com"]
-// Channel Created, Channel updated and channel deleted.
 
 handle.emojiFilter = (text) => {
     const onlyEmojis = text.replace(new RegExp('[\u0000-\u1eeff]', 'g'), '')
@@ -39,7 +38,6 @@ handle.filter = async (m, bot) => {
             if(m.mentions.members.first() && split.length > count) return resolve("Mass Mention");
         }
         if(link) {
-            // let search = linkify.find(m.content);
             if(m.content.includes("discord.gg")) {return resolve('Using links')}
         }
         resolve(false)
@@ -52,21 +50,6 @@ handle.messageUpdate = async (bot,oldM,newM) => {
     let logL = await log.send(bot,false,newM.guild.id, `Message Edit: Message sent by ${newM.member.user.tag} has been edited from **\`${oldM.content}\`** to **\`${newM.content}\`****`,newM.author.avatarURL(), 0, 'messageUpdate')
     return;
 }
-//
-// handle.userUpdate = async (bot,oldU,newU) => {
-//   let a;
-//   let b;
-//   let word;
-//   if(oldU.username !== newU.username) {a = oldU.username; b = newU.username; word = 'Username'}
-//   if(oldU.discriminator !== newU.discriminator) {a = oldU.discriminator; b = newU.discriminator; word = 'Tag'}
-//   for(let guild of bot.guilds.cache.values()) {
-//     if(guild.members.cache.get(newU.id)) {
-//       let logL = await log.send(bot,guild.id, `${word} Update: ${word} for **\`${oldU.tag}\`** changed to ${newU.tag}`, newU.avatarURL())
-//     }
-//   }
-//
-//   return;
-// }
 
 handle.guildMemberUpdate = async (bot,oldM,newM) => {
     if(oldM.displayName !== newM.displayName) {

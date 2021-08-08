@@ -7,16 +7,16 @@ const sequelize = new Sequelize('syniks', 'syniks', '58jne4P@', {
     dialect: 'mariadb',
     logging: false,
     define: {
-      freezeTableName: true
+        freezeTableName: true
     }
 });
 
 temp.db = sequelize.define('tempStorage', {
-  guild: {
-    type: Sequelize.STRING,
-    unique: true,
-    primaryKey: true
-  },
+    guild: {
+        type: Sequelize.STRING,
+        unique: true,
+        primaryKey: true
+    },
     id: Sequelize.STRING,
     time: Sequelize.STRING,
     type: Sequelize.STRING,
@@ -24,32 +24,32 @@ temp.db = sequelize.define('tempStorage', {
 temp.db.sync();
 
 temp.load = async() => {
-return new Promise(async(resolve,reject) => {
-  let getTemp = await temp.db.findAll({});
-  resolve(getTemp);
-})
+    return new Promise(async(resolve,reject) => {
+        let getTemp = await temp.db.findAll({});
+        resolve(getTemp);
+    })
 }
 
 temp.add = async(g,id,type,time) => {
-  return new Promise(async (resolve,reject) => {
-    let search = await temp.db.findOne({where: {id: id, guild:g, type:type}});
-    if(search) return resolve(false)
-    let add = await temp.db.create({id:id,guild:g,type:type,time:new Date().getTime() + time})
-    resolve();
-  })
+    return new Promise(async (resolve,reject) => {
+        let search = await temp.db.findOne({where: {id: id, guild:g, type:type}});
+        if(search) return resolve(false)
+        let add = await temp.db.create({id:id,guild:g,type:type,time:new Date().getTime() + time})
+        resolve();
+    })
 }
 
 
 temp.remove = async(g,id,type) => {
-  return new Promise(async (resolve,reject) => {
-    let rem = await temp.db.destroy({where: {id: id, guild:g, type:type}});
-    resolve();
-  })
+    return new Promise(async (resolve,reject) => {
+        let rem = await temp.db.destroy({where: {id: id, guild:g, type:type}});
+        resolve();
+    })
 }
 
 temp.get = async(g,id,type) => {
-  return new Promise(async (resolve,reject) => {
-    let search = await temp.db.findOne({where: {id: id, guild:g, type:type}});
-    if(search) {resolve(search)} else {resolve(false)}
-  })
+    return new Promise(async (resolve,reject) => {
+        let search = await temp.db.findOne({where: {id: id, guild:g, type:type}});
+        if(search) {resolve(search)} else {resolve(false)}
+    })
 }
