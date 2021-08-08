@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.platform == 'linux' ? 'production' : 'development';
+
 const Discord = require("discord.js")
 const bot = new Discord.Client({ disableMentions: "everyone", ws: { intents: Discord.Intents.ALL }, partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const fs = require("fs")
@@ -37,7 +39,6 @@ bot.getDirectories = source =>
 
 
 bot.on("ready", async () => {
-  console.info("Welcome to the bot!", bot.user.tag)
   bot.manager.init(bot.user.id);
   await bot.utils.Help.db.sync();
   let getDirs = bot.getDirectories("./commands")
@@ -76,8 +77,9 @@ bot.on("ready", async () => {
       bot.on(name, event.bind(null, bot));
       loaded.events++;
     }
+
+    console.info(`[Syniks] Syniks ready with ${bot.guilds.cache.size} guilds.`);
     
-    console.info( `Loaded ${loaded.commands} commands & ${loaded.events} events` );
     bot.user.setActivity("Syniks.com", {type: "PLAYING"})
 })
 
@@ -108,8 +110,6 @@ bot.parseCh = (m,i) => {if(!i) {i = 0}; let me = m.mentions.channels.first() || 
 
 bot.su = (m) => {return new Discord.MessageEmbed().setColor(bot.color).setDescription(`**[:white_check_mark:] ${m}**`)}
 
-
-bot.login(bot.config.token);
 
 setInterval(async function() {
 let load = await bot.utils.Temp.load();
@@ -170,9 +170,101 @@ setInterval(async () => {
 let stat = 0;
 let stats = ['+help', `syniks.com`, `$guild guilds`]
 setInterval(() => {
+if (!bot && !bot.user && typeof bot.user.setActivity != 'function ') return;
 let getStat = stats[stat];
 getStat = getStat.replace("$mem", bot.users.cache.size);
 getStat = getStat.replace("$guild", bot.guilds.cache.size)
 bot.user.setActivity(getStat, {type: "WATCHING"});
 if(stat == (stats.length - 1)) {stat = 0} else {stat++}
 }, 10000)
+
+
+//
+const util = require('util');
+const childProcess = require('child_process');
+
+require.extensions['.txt'] = (module, filename) => {
+    module.exports = fs.readFileSync(filename, 'utf8');
+};
+
+const env = process.env.NODE_ENV;
+const logo = require('./logo.txt');
+
+
+
+init().then(() => {
+    process.on('uncaughtException', handleException.bind(this));
+    process.on('unhandledRejection', handleRejection.bind(this));
+
+    function handleRejection(reason, p) {
+		try {
+			console.error('Unhandled rejection at: Promise ', p, 'reason: ', reason); // eslint-disable-line
+		} catch (err) {
+			console.error(reason); // eslint-disable-line
+		}
+	}
+
+	function handleException(err) {
+		if (!err || (typeof err === 'string' && !err.length)) {
+			return console.error('An undefined exception occurred.'); // eslint-disable-line
+		}
+
+		console.error(err); // eslint-disable-line
+	}
+
+    bot.login(bot.config.token);
+});
+
+function log(...args) {
+	process.stdout.write(`${util.format.apply(null, args)}\n`);
+}
+
+async function init() {
+	log(logo, '\n');
+	log(`Starting [${env} ${require('../package.json').version}]`);
+
+	if (env === 'production') {
+		return Promise.resolve();
+	};
+
+	try {
+		log(`Packages:`);
+        await listPackages();
+	} catch (err) {};
+
+	try {
+		log(`Repo:`);
+        await gitInfo();
+	} catch (err) {};
+
+	return Promise.resolve();
+};
+
+function listPackages() {
+	return new Promise((res, rej) =>
+		childProcess.exec('npm list --depth=0', (err, stdout) => {
+			if (err) {
+				return rej(err);
+			};
+			let output = stdout.split('\n');
+			log(`${output.slice(1, output.length - 1).join('\n')}\n`);
+			res();
+		}));
+};
+
+function gitInfo() {
+	return new Promise((res, rej) =>
+		childProcess.exec('git log -n 3 --no-color --pretty=format:[\\"%h\\",\\"%s\\",\\"%cr\\",\\"%an\\"],', (err, stdout) => {
+			if (err) {
+				return rej(err);
+			};
+
+			let str = stdout.split('\n').join('');
+			str = str.substr(0, str.length - 1);
+
+			let lines = JSON.parse(`[${str}]`);
+			lines = lines.map(l => `[${l[0]}] ${l[1]} - ${l[2]}`);
+			log(`${lines.join('\n')}\n`);
+			return res();
+		}));
+};
