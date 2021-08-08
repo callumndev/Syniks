@@ -6,7 +6,6 @@ const sequelize = new Sequelize('syniks', 'syniks', '58jne4P@', {
     port: 3306,
     dialect: 'mariadb',
     logging: false,
-    operatorsAliases: false,
     define: {
         freezeTableName: true
     }
