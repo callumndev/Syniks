@@ -212,7 +212,8 @@ init().then(() => {
         console.error(err);
     }
     
-    bot.login(bot.config.token);
+    const { token } = require( './config/secrets.json' );
+    bot.login(token);
 });
 
 function log(...args) {
