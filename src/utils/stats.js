@@ -34,9 +34,7 @@ return new Promise(async(resolve,reject) => {
 stats.setup = async(guild) => {
   return new Promise(async (resolve,reject) => {
     let checkConf = await stats.load(guild.id);
-    console.log("START", checkConf)
     if(checkConf) {return resolve(false)}
-    console.log("START2", true)
     let makeVC = await guild.channels.create(`Member Count: ${guild.memberCount}`, {
       type: "voice",
       permissionOverwrites: [
@@ -60,7 +58,6 @@ stats.setup = async(guild) => {
       ]
     })
     onlineVC = onlineVC.id;
-    console.log("START3", true)
     stats.db.create({guild: guild.id, members: makeVC, bots: botVC, online: onlineVC})
 
     resolve(true);
@@ -70,16 +67,11 @@ stats.setup = async(guild) => {
 stats.update = async(guild) => {
   return new Promise(async (resolve,reject) => {
     let checkConf = await stats.load(guild.id);
-    console.log(checkConf)
     if(!checkConf) {return resolve(false)}
-    console.log("member", guild.memberCount)
-    console.log('bot', guild.members.cache.filter(mem => mem.user.bot == true).size)
-    console.log("online", guild.members.cache.filter(mem => mem.user.presence.status == 'online').size)
     let loop = [guild.channels.cache.get(checkConf.online), guild.channels.cache.get(checkConf.bots), guild.channels.cache.get(checkConf.members)]
     for(let i = 0; i < loop.length; i++) {
       let c = loop[i];
       if(!c) continue;
-      console.log(c.name)
       switch(i) {
         case 0:
           c.setName(`Member Count: ${guild.memberCount}`)
@@ -99,9 +91,7 @@ stats.update = async(guild) => {
 stats.remove = async(guild) => {
   return new Promise(async (resolve,reject) => {
     let checkConf = await stats.load(guild.id);
-    console.log("REM", checkConf)
     if(!checkConf) {return resolve(false)}
-    console.log("REM2", checkConf)
     let onlineVC = guild.channels.cache.get(checkConf.online)
     let botVC = guild.channels.cache.get(checkConf.bots)
     let memVC = guild.channels.cache.get(checkConf.members)

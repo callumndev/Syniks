@@ -55,7 +55,7 @@ poll.sweep = async(mID, user) => {
     let a = false;
     for(let key of Object.keys(loadR)) {
       let v = loadR[key]
-      if(v.includes(user)) {console.log("INCLUDES"); a = true; break;}
+      if(v.includes(user)) {a = true; break;}
     }
     resolve(a);
   })
@@ -79,10 +79,7 @@ poll.removeReact = async(mID, user, emoji) => {
 poll.procOp = async(op) => {
   return new Promise(async (resolve,reject) => {
     let list = {};
-    console.log(op)
-    console.log(list)
-    for(let i = 0; i < op.length; i++) {console.log(emoji[i+1]); list[emoji[i+1]] = op[i]}
-    console.log(list)
+    for(let i = 0; i < op.length; i++) {list[emoji[i+1]] = op[i]}
 
     resolve(list);
   })
@@ -95,7 +92,7 @@ let loadR = getP.reactions;
 if(!loadR) {loadR = {}};
 if(!loadR[emoji]) {loadR[emoji] = []};
 let ch = await poll.sweep(mID, user);
-if(ch) {console.log("SET"); loadR = await poll.removeReact(mID, user)}
+if(ch) {loadR = await poll.removeReact(mID, user)}
 let arr = loadR[emoji];
 arr.push(user);
 loadR[emoji] = arr;

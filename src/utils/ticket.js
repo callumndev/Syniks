@@ -131,7 +131,6 @@ ticket.set = async(id,key,val) => {
     let load = await ticket.load(id);
     let newSet = {};
     newSet[key] = val;
-    console.log(newSet);
     let updateDb = await ticket.db.update(newSet, {where: {guild: id}})
     resolve(true)
   })

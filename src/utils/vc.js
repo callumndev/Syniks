@@ -26,7 +26,6 @@ vc.db.sync();
 vc.get = async(g,c) => {
 return new Promise(async(resolve,reject) => {
   let getConf = await config.checkVC(g,c)
-  console.log(getConf)
   if(getConf) {resolve(getConf)} else {resolve(false)}
 })
 }

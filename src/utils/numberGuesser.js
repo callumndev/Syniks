@@ -82,7 +82,6 @@ numberGuesser.onGuessCorrect = async (message, guildConfig) => {
     try {
         let toDelete = ['numberGuesserChannel', 'numberGuesserNumber', 'numberGuesserNumberMin', 'numberGuesserNumberMax'];
         toDelete.map(prop => guildConfig[prop] = null);
-        console.log('guildConfig', guildConfig.dataValues)
         await numberGuesser.bot.utils.Config.db.update(guildConfig.dataValues, { where: { id: message.guild.id } });
         return message.channel.send(numberGuesser.generateEmbed({
             title: 'Correct!',
@@ -104,7 +103,5 @@ numberGuesser.guildHasGame = async (id) => {
 };
 
 numberGuesser.createGame = async (id, numberGuesserChannel, numberGuesserNumber, numberGuesserNumberMin, numberGuesserNumberMax) => {
-    console.log('id, numberGuesserChannel, numberGuesserNumber, numberGuesserNumberMin, numberGuesserNumberMax');
-    console.log(id, numberGuesserChannel, numberGuesserNumber, numberGuesserNumberMin, numberGuesserNumberMax);
     return await numberGuesser.bot.utils.Config.db.update({ numberGuesserChannel, numberGuesserNumber, numberGuesserNumberMin, numberGuesserNumberMax }, { where: { id } });
 };

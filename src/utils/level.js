@@ -40,7 +40,6 @@ level.ranks.sync();
 
 level.getUser = async (mem) => {
   let promise = new Promise(async function(resolve, reject) {
-    console.log(`GOT ${mem.user.username}`)
     if(!mem) resolve(false)
     let findUser = await level.db.findOne({where: {id: mem.user.id, guild: mem.guild.id}})
     if(!findUser) {findUser = await level.db.create({id: mem.user.id, xp: 0, messages: 0, points: 0, guild: mem.guild.id})}

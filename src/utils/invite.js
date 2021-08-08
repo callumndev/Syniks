@@ -30,7 +30,6 @@ return new Promise(async(resolve,reject) => {
 invite.update = async(g,l) => {
 return new Promise(async(resolve,reject) => {
   l = JSON.parse(JSON.stringify(l))
-  console.log("L PROCESS", l)
   let getW = await invite.db.findOne({where: {id:g}})
   if(getW) {await invite.db.update({invites:l}, {where: {id:g}})} else {invite.db.create({id:g,invites:l})}
   resolve();

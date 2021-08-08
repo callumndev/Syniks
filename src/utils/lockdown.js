@@ -49,7 +49,6 @@ lock.check = async (c) => {
 lock.end = async (c) => {
   let promise = new Promise(async function(resolve, reject) {
     let rem = await lock.db.destroy({where:{channel:c}})
-    console.log('INSERT', insert);
     resolve(insert.wid);
   });
   return promise;
@@ -57,9 +56,7 @@ lock.end = async (c) => {
 
 lock.process = async(channel,roles, val) => {
   return new Promise(async (resolve,reject) => {
-    console.log('roles', roles)
     roles = roles.split(",");
-    console.log(roles)
     if(val == false) {await lock.db.create({channel:channel.id})} else {await lock.db.destroy({where:{channel:channel.id}})}
     for(let role of roles) {
       let roleObj = channel.guild.roles.cache.get(role);
@@ -81,11 +78,8 @@ lock.set = async(g,r) => {
 return new Promise(async(resolve,reject) => {
 let list = []
 for(let role of r) {
-  console.log('-'.repeat(15),role[0])
   list.push(role[0])
 }
-console.log('FINAL UP', list);
-console.log('...................',list,list.join(","))
 let getC = await lock.load(g);
 if(getC) {await lock.config.update({roles: list.join(",")}, {where: {guild:g}})} else {
   let add = await lock.config.create({guild: g, roles: list.join(',')})

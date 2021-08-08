@@ -55,7 +55,7 @@ music.add = async (message,song) => {
         music.play(message.guild, queueContruct.songs[0]);
         resolve();
       } catch (err) {
-        console.log(err);
+        console.error(err);
         queue.delete(message.guild.id);
         message.channel.send(err);
         return resolve()
@@ -138,7 +138,6 @@ music.loadAll = async (id,mem) => {
 music.stop = (message) => {
   const serverQueue = music.queue.get(message.guild.id);
   if(!serverQueue) return;
-  console.log("completing")
   serverQueue.songs = [];
   music.queue.delete(message.guild.id)
   serverQueue.connection.dispatcher.end();

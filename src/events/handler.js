@@ -110,7 +110,7 @@ handle.guildUpdate = async (bot,oldG,newG) => {
       list.push(`\`${key}\` | \`${oldG[key]}\` => **${newG[key]}**`)
     }
   }
-  console.log(`Server Settings Update: Settings updated for  **\`${newG.name}\`**\n${list.join("\n")}`)
+  console.info(`Server Settings Update: Settings updated for  **\`${newG.name}\`**\n${list.join("\n")}`)
   let logL = await log.send(bot,false,newG.id, `Server Settings Update: Settings updated for  **\`${newG.name}\`**\n\n${list.join("\n")}`, 0, 0, 'guildUpdate');
 }
 

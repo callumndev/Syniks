@@ -55,8 +55,6 @@ automod.set = async(guild,key,val) => {
       if(text.length > 1) {list = text.split(" ")} else {list = []}
         if(key.endsWith('+')) {
           val.forEach(r => {if(list.indexOf(r) == -1 && t.indexOf(r) == -1) {list.push(r)};})
-          console.log('list', list)
-          console.log('t', t)
         } else {
         val.forEach(r => {list = list.filter(w => w !== r)})
         }
@@ -66,7 +64,6 @@ automod.set = async(guild,key,val) => {
     }
     let newSet = {};
     newSet[key] = val;
-    console.log(newSet)
     let updateDb = await automod.db.update(newSet, {where: {guild: guild}})
     resolve(true)
   })
@@ -92,7 +89,6 @@ automod.load = async (guild) => {
     listBy.forEach(lis => {s += `<@&` + lis + `>`})
     list.set('bypass list', s)
     for(let i = 0; i < arr.length; i++) {let w = arr[i]; list.set(emoji[i+1], {key: w, q: `${emoji[i+1]} ${q[i]}`, enabled: loadConf.dataValues[w] == true ? true : loadConf.dataValues[w] == false ? false : loadConf.dataValues[w] ? loadConf.dataValues[w] : '__'});};
-    console.log(list)
     resolve(list);
   })
 }

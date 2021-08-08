@@ -23,11 +23,8 @@ class MusicClient {
               if (guild) guild.shard.send(payload);
             }
           })
-            .on("nodeConnect", node => console.log(`Node "${node.options.identifier}" connected.`))
-            // .on("nodeError", (node, error) => console.log(
-            //   `Node "${node.options.identifier}" encountered an error: ${error.message}.`
-            // ))
-            .on("nodeError", (node, error) => console.log(`Node ${node.options.identifier} had an error: ${error.message}`))
+            .on("nodeConnect", node => console.info(`Node "${node.options.identifier}" connected.`))
+            .on("nodeError", (node, error) => console.info(`Node ${node.options.identifier} had an error: ${error.message}`))
 
             .on("trackStart", (player, track) => {
               const channel = this.bot.channels.cache.get(player.textChannel);

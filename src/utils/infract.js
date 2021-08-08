@@ -33,12 +33,9 @@ infract.add = async (message,id,reason,t,b) => {
   let promise = new Promise(async function(resolve, reject) {
     let time = new Date().getTime();
     let staff = message.author.id;
-    console.log(b)
     if(b) {staff = message.guild.me.user.id}
     t = t.charAt(0).toUpperCase() + t.substring(1)
-    console.log('staff', staff)
     let insert = await infract.db.create({guild: message.guild.id, id: id, reason:reason, staff:staff, time:time, type: t})
-    console.log('INSERT', insert);
     resolve(insert.wid);
   });
   return promise;
