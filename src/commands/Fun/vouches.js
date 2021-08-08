@@ -9,13 +9,13 @@ exports.run = async (bot,message,args) => {
     .setDescription(`**Vouches:** ${load.count}`)
     .setThumbnail(user.user.avatarURL())
     .setColor(bot.color)
-
+    
     return message.channel.send(vouch)
 }
 
 exports.help = {
-  name: "vouches",
-  aliases: [],
-  description: "Displays all vouches",
-  usage: "(user)"
+    name: "vouches",
+    aliases: [],
+    description: "Displays all vouches",
+    usage: "(user)"
 }

@@ -1,30 +1,30 @@
 {
-  "name": "radontrax",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/radontrax.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Sam",
-  "license": "ISC",
-  "dependencies": {
-    "@discordjs/opus": "^0.3.2",
-    "canvas": "^2.8.0",
-    "chalk": "^4.1.2",
-    "child_process": "^1.0.2",
-    "discord.js": "^12.2.0",
-    "erela.js": "^2.3.1",
-    "format-ms": "^1.2.1",
-    "install": "^0.13.0",
-    "linkifyjs": "^2.1.9",
-    "mariadb": "^2.5.4",
-    "mysql2": "^2.2.5",
-    "path": "^0.12.7",
-    "require-all": "^3.0.0",
-    "sequelize": "^6.3.3",
-    "snekfetch": "^4.0.4",
-    "yt-search": "^2.3.0",
-    "ytdl-core-discord": "^1.2.1"
-  }
+    "name": "radontrax",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/radontrax.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Sam",
+    "license": "ISC",
+    "dependencies": {
+        "@discordjs/opus": "^0.3.2",
+        "canvas": "^2.8.0",
+        "chalk": "^4.1.2",
+        "child_process": "^1.0.2",
+        "discord.js": "^12.2.0",
+        "erela.js": "^2.3.1",
+        "format-ms": "^1.2.1",
+        "install": "^0.13.0",
+        "linkifyjs": "^2.1.9",
+        "mariadb": "^2.5.4",
+        "mysql2": "^2.2.5",
+        "path": "^0.12.7",
+        "require-all": "^3.0.0",
+        "sequelize": "^6.3.3",
+        "snekfetch": "^4.0.4",
+        "yt-search": "^2.3.0",
+        "ytdl-core-discord": "^1.2.1"
+    }
 }

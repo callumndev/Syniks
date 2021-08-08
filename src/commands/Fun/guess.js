@@ -13,7 +13,7 @@ exports.run = async (bot, message, args) => {
     number = parseFloat( number );
     minNumber = parseFloat( minNumber );
     maxNumber = parseFloat( maxNumber );
-
+    
     if (!channel) {
         return message.channel.send(bot.utils.numberGuesser.generateEmbed({
             title: 'Invalid Channel!',
@@ -42,7 +42,7 @@ exports.run = async (bot, message, args) => {
             color: 'RED'
         }));
     };
-
+    
     if (await bot.utils.numberGuesser.guildHasGame(message.guild.id)) {
         return message.channel.send(bot.utils.numberGuesser.generateEmbed({
             title: 'Already a game active!',
@@ -67,7 +67,7 @@ exports.run = async (bot, message, args) => {
     
     try {
         await bot.utils.numberGuesser.createGame(message.guild.id, channel.id, number, minNumber, maxNumber);
-
+        
         return message.channel.send(bot.utils.numberGuesser.generateEmbed({
             title: 'Guess The Number!',
             description: `Game created! The game will be hosted in ${channel}`,

@@ -1,5 +1,7 @@
 node_modules
 LavaLink
-transcripts
 
 .DS_Store
+
+# Ticket transcripts
+src/transcripts/*.txt

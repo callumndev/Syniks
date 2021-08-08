@@ -24,8 +24,8 @@ exports.run = async (bot,message,args,msg) => {
 };
 
 exports.help = {
-  name: 'config',
-  aliases: ['setup'],
-  usage: '()',
-  description: 'Update server configuration'
+    name: 'config',
+    aliases: ['setup'],
+    usage: '()',
+    description: 'Update server configuration'
 };

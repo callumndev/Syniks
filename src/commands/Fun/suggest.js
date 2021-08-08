@@ -21,8 +21,8 @@ exports.run = async (bot,message,args) => {
 };
 
 exports.help = {
-  name: "suggest",
-  aliases: [''],
-  usage: '<suggest>',
-  description: "Provide a suggestion"
+    name: "suggest",
+    aliases: [''],
+    usage: '<suggest>',
+    description: "Provide a suggestion"
 }

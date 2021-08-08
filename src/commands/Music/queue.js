@@ -3,15 +3,15 @@ const ytdl = require('ytdl-core-discord');
 const search = require("yt-search")
 
 exports.run = async (bot,message,args) => {
-  const player = bot.MusicControl.getClient(message);
-if(!player) return message.channel.send(bot.error('No active music found'))
+    const player = bot.MusicControl.getClient(message);
+    if(!player) return message.channel.send(bot.error('No active music found'))
     const page = args.length && Number(args[0]) ? Number(args[0]) : 1;
-
+    
     const end = page * 10;
     const start = end - 10;
-
+    
     const tracks = player.queue.slice(start, end);
-
+    
     let e = new Discord.MessageEmbed()
     .setTitle(`Server Queue`)
     .setColor(bot.color)
@@ -23,8 +23,8 @@ if(!player) return message.channel.send(bot.error('No active music found'))
 }
 
 exports.help = {
-  name: "queue",
-  aliases: ["que"],
-  description: "View the queue",
-  usage: "()"
+    name: "queue",
+    aliases: ["que"],
+    description: "View the queue",
+    usage: "()"
 }
