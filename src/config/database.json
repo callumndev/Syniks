@@ -1,0 +1,14 @@
+{
+    "database": "syniks",
+    "username": "syniks",
+    "password": "58jne4P@",
+    "options": {
+        "host": "syniks.com",
+        "port": 3306,
+        "dialect": "mariadb",
+        "logging": false,
+        "define": {
+            "freezeTableName": true
+        }
+    }
+}

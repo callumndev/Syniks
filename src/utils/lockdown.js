@@ -1,15 +1,7 @@
 const lock = module.exports;
 const Sequelize = require('sequelize')
 const Discord = require("discord.js")
-const sequelize = new Sequelize('syniks', 'syniks', '58jne4P@', {
-    host: 'syniks.com',
-    port: 3306,
-    dialect: 'mariadb',
-    logging: false,
-    define: {
-        freezeTableName: true
-    }
-});
+const sequelize = require( './database.js' );
 
 lock.db = sequelize.define('lockdownInert', {
     channel: {

@@ -1,14 +1,6 @@
 const ticket = module.exports;
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('syniks', 'syniks', '58jne4P@', {
-    host: 'syniks.com',
-    port: 3306,
-    dialect: 'mariadb',
-    logging: false,
-    define: {
-        freezeTableName: true
-    }
-});
+const sequelize = require( './database.js' );
 
 ticket.int = sequelize.define('ticketInt', {
     id: {

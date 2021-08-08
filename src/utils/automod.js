@@ -1,15 +1,7 @@
 const automod = module.exports;
 const Sequelize = require('sequelize')
 let emoji = require("./emoji")
-const sequelize = new Sequelize('syniks', 'syniks', '58jne4P@', {
-    host: 'syniks.com',
-    port: 3306,
-    dialect: 'mariadb',
-    logging: false,
-    define: {
-        freezeTableName: true
-    }
-});
+const sequelize = require( './database.js' );
 
 automod.db = sequelize.define('autoSA', {
     guild: {

@@ -3,15 +3,7 @@ const Sequelize = require('sequelize')
 const Discord = require("discord.js")
 const ytdl = require('ytdl-core-discord');
 music.queue = new Map();
-const sequelize = new Sequelize('syniks', 'syniks', '58jne4P@', {
-    host: 'syniks.com',
-    port: 3306,
-    dialect: 'mariadb',
-    logging: false,
-    define: {
-        freezeTableName: true
-    }
-});
+const sequelize = require( './database.js' );
 
 music.db = sequelize.define('musicions', {
     wid: {

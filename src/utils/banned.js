@@ -3,15 +3,7 @@ const Sequelize = require('sequelize')
 
 banned.list = [];
 
-const sequelize = new Sequelize('syniks', 'syniks', '58jne4P@', {
-    host: 'syniks.com',
-    port: 3306,
-    dialect: 'mariadb',
-    logging: false,
-    define: {
-        freezeTableName: true
-    }
-});
+const sequelize = require( './database.js' );
 
 banned.db = sequelize.define('bannedStorage', {
     i: {

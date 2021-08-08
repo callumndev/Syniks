@@ -1,14 +1,6 @@
 const faq = module.exports;
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('syniks', 'syniks', '58jne4P@', {
-    host: 'syniks.com',
-    port: 3306,
-    dialect: 'mariadb',
-    logging: false,
-    define: {
-        freezeTableName: true
-    }
-});
+const sequelize = require( './database.js' );
 
 faq.db = sequelize.define('faqStorage', {
     num: {
