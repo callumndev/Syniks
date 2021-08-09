@@ -11,13 +11,13 @@ lock.db = sequelize.define('lockdownInert', {
     }
 })
 
-lock.config = sequelize.define('lockdownConfigs', {
+lock.config = sequelize.define('lockdownConfig', {
     guild: {
         type: Sequelize.STRING,
         primaryKey: true,
         unique: true
     },
-    roles: Sequelize.STRING
+    roles: { type: Sequelize.JSON, allowNull: false, defaultValue: [] },
 })
 lock.db.sync()
 lock.config.sync();
@@ -48,7 +48,6 @@ lock.end = async (c) => {
 
 lock.process = async(channel,roles, val) => {
     return new Promise(async (resolve,reject) => {
-        roles = roles.split(",");
         if(val == false) {await lock.db.create({channel:channel.id})} else {await lock.db.destroy({where:{channel:channel.id}})}
         for(let role of roles) {
             let roleObj = channel.guild.roles.cache.get(role);
@@ -73,8 +72,8 @@ lock.set = async(g,r) => {
             list.push(role[0])
         }
         let getC = await lock.load(g);
-        if(getC) {await lock.config.update({roles: list.join(",")}, {where: {guild:g}})} else {
-            let add = await lock.config.create({guild: g, roles: list.join(',')})
+        if(getC) {await lock.config.update({roles: list}, {where: {guild:g}})} else {
+            let add = await lock.config.create({guild: g, roles: list})
         }
         resolve();
     })
