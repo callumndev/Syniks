@@ -17,7 +17,6 @@
         "erela.js": "^2.3.1",
         "format-ms": "^1.2.1",
         "install": "^0.13.0",
-        "linkifyjs": "^2.1.9",
         "mariadb": "^2.5.4",
         "mysql2": "^2.2.5",
         "path": "^0.12.7",

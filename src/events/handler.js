@@ -1,5 +1,4 @@
 const handle = module.exports;
-const linkify = require('linkifyjs')
 const log = require("../utils/log.js")
 const react = require("../utils/react.js")
 const Discord = require("discord.js")
