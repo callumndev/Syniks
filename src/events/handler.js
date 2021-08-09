@@ -7,7 +7,7 @@ const fs = require("fs")
 const tickets = require("../utils/ticket")
 const vc = require("../utils/vc")
 const automod = require("../utils/automod")
-handle.list = ['message', 'messageDelete', 'messageUpdate', 'userUpdate', 'guildMemberAdd', 'guildMemberUpdate', 'roleCreate', 'roleDelete', 'roleUpdate', 'guildUpdate', 'emojiUpdate', 'channelCreate', 'channelUpdate', 'channelDelete', 'messageReactionAdd', 'messageReactionRemove', 'voiceStateUpdate', 'inviteCreate']
+handle.list = ['message', 'messageDelete', 'messageUpdate', 'userUpdate', 'guildMemberAdd', 'guildMemberRemove', 'guildMemberUpdate', 'roleCreate', 'roleDelete', 'roleUpdate', 'guildUpdate', 'emojiUpdate', 'channelCreate', 'channelUpdate', 'channelDelete', 'messageReactionAdd', 'messageReactionRemove', 'voiceStateUpdate', 'inviteCreate']
 handle.ignore = ['embedEnabled', 'systemChannelFlags', 'permissions', 'permissionOverwrites']
 let ban = ["https://" , "www." , ".gg" , ".com"]
 
@@ -154,6 +154,17 @@ handle.guildMemberAdd = async (bot,mem) => {
         if(!r || !mem.guild.roles.cache.get(r)) return;
         mem.roles.add(r)
     })
+}
+
+handle.guildMemberRemove = async (bot,mem) => {
+    let getR = await bot.utils.Config.load(mem.guild.id);
+    if(getR.leaveChannel) {
+        let channel = mem.guild.channels.cache.get(getR.leaveChannel);
+        if(!channel) return;
+        let form = await log.format(`Member Left: ${mem.user.tag} has left.`, mem.guild)
+        if(getR.leaveImage) {form.setImage(getR.leaveImage)}
+        let logL = await channel.send(form)
+    }
 }
 
 handle.inviteCreate = async (bot,inv) => {

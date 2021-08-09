@@ -40,7 +40,10 @@ config.db = sequelize.define( 'config', {
     numberGuesserChannel: Sequelize.STRING,
     numberGuesserNumber: Sequelize.INTEGER,
     numberGuesserNumberMin: Sequelize.INTEGER,
-    numberGuesserNumberMax: Sequelize.INTEGER
+    numberGuesserNumberMax: Sequelize.INTEGER,
+
+    leaveChannel:       Sequelize.STRING,
+    leaveImage:         Sequelize.STRING
 } );
 
 config.db.sync();
