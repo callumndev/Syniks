@@ -67,7 +67,7 @@ numberGuesser.onGuessTooBig = (message, guildConfig) => {
 numberGuesser.onGuessIncorrect = (message) => {
     return message.channel.send(numberGuesser.generateEmbed({
         title: 'Incorrect!',
-        description: 'Guess incorrect! Your guess was incorrect, try again',
+        description: 'Your guess was incorrect, please try again.',
         color: 'RED'
     }));
 };
@@ -79,7 +79,7 @@ numberGuesser.onGuessCorrect = async (message, guildConfig) => {
         await numberGuesser.bot.utils.Config.db.update(guildConfig.dataValues, { where: { id: message.guild.id } });
         return message.channel.send(numberGuesser.generateEmbed({
             title: 'Correct!',
-            description: `Guess correct! Your guess was correct, congratulations ${message.author.tag}. This game has now ended`,
+            description: `Your guess was correct, congratulations <@${message.author.id}>. This game as now ended, management will start a new game soon.`,
             color: 'GREEN'
         }));
     } catch (err) {
