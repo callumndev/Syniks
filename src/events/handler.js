@@ -120,7 +120,7 @@ handle.guildMemberAdd = async (bot,mem) => {
             let upd = await bot.utils.Invite.update(mem.guild.id, arr);
             let channel = mem.guild.channels.cache.get(getR.inviteChannel);
             if(!channel) return;
-            let form = await log.format(`Member Joined: ${mem.user.tag} has joined. Inviter could not be detected.`, mem.guild)
+            let form = await log.format(`Member Joined: <@!${mem.user.id}> has joined. Inviter could not be detected.`, mem.guild)
             if(getR.inviteImage) {form.setImage(getR.inviteImage)}
             let logL = await channel.send(form)
         } else {
@@ -140,7 +140,7 @@ handle.guildMemberAdd = async (bot,mem) => {
                         let channel = mem.guild.channels.cache.get(getR.inviteChannel);
                         if(!channel) return;
                         
-                        let form = await log.format(`Member Joined: ${mem.user.tag} has joined. Invited by ${mem.guild.members.cache.get(invite.inviterID) ? mem.guild.members.cache.get(invite.inviterID).user.tag : `(${invite.inviter})`}`, mem.guild)
+                        let form = await log.format(`Member Joined: <@!${mem.user.id}> has joined. Invited by ${mem.guild.members.cache.get(invite.inviterID) ? mem.guild.members.cache.get(invite.inviterID).user.tag : `(${invite.inviter})`}`, mem.guild)
                         if(getR.inviteImage) {form.setImage(getR.inviteImage)}
                         let logL = await channel.send(form)
                         break;
