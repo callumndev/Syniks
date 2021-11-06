@@ -3,7 +3,7 @@
     "username": "syniks",
     "password": "58jne4P@",
     "options": {
-        "host": "syniks.com",
+        "host": "51.68.199.26",
         "port": 3306,
         "dialect": "mariadb",
         "logging": false,
