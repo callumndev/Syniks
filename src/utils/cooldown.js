@@ -11,7 +11,7 @@ cool.db = sequelize.define('cooldowns', {
         autoIncrement: true
     },
     id: Sequelize.STRING,
-    time: Sequelize.INTEGER,
+    time: Sequelize.BIGINT,
     type: Sequelize.STRING
 })
 cool.db.sync();
