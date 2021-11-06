@@ -73,7 +73,7 @@ exports.run = async (bot,message,args,disableMentions) => {
     ctx.fillText(`Rank #${rank}`, canvas.width / 1.25, canvas.height / 5.3);
     ctx.lineWidth = 2;
     ctx.strokeStyle = '#fefefe';
-    ctx.strokeRect(canvas.width / 1.32, canvas.height/70, 300, 65);
+    ctx.strokeRect(canvas.width / 1.32, canvas.height/110, 300, 65);
     ctx.font = applyText(canvas, `_______________`);
     ctx.fillText(`_______________`, canvas.width / 2.5, canvas.height / 1.8);
     ctx.font = `30px bold`
