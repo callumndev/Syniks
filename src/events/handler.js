@@ -46,7 +46,8 @@ handle.filter = async (m, bot) => {
 handle.messageUpdate = async (bot,oldM,newM) => {
     if(!oldM.content) return;
     if(newM.patrial) {newM = await newM.fetch()}
-    let logL = await log.send(bot,false,newM.guild.id, `Message Edit: Message sent by ${newM.member.user.tag} has been edited from **\`${oldM.content}\`** to **\`${newM.content}\`****`,newM.author.avatarURL(), 0, 'messageUpdate')
+    if (oldM.content == newM.content) return;
+    let logL = await log.send(bot,false,newM.guild.id, `Message Edit: Message sent by ${newM.member.user.tag} has been edited from **\`${oldM.content}\`** to **\`${newM.content}\`**`,newM.author.avatarURL(), 0, 'messageUpdate')
     return;
 }
 
