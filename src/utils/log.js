@@ -22,10 +22,15 @@ log.send = async(bot,message,id,msg,img,t,eventName) => {
 
 
 log.format = (m,g,mg,i) => {
+    let split = m.split(':');
+
     let e = new Discord.MessageEmbed()
-    .setTitle(`${m.split(":")[0]}`)
-    .setDescription(m.split(":")[1])
+    .setTitle(split[0])
     .setThumbnail(g.iconURL());
+
+    split.shift();
+    e.setDescription(split.join(''));
+
     if(mg) {e.setThumbnail(mg)}
     if(!i) {e.setColor("#FFFF00")} else {e.setColor("FF0000")}
     
